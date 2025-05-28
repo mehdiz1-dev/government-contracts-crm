@@ -1,0 +1,58 @@
+yarn run v1.22.22
+warning ../../package.json: No license field
+$ /Users/mehdiz/Desktop/government-contracts-crm/node_modules/.bin/next dev
+   ▲ Next.js 15.3.2
+   - Local:        http://localhost:3000
+   - Network:      http://10.0.0.25:3000
+   - Environments: .env.local, .env
+
+ ✓ Starting...
+ ✓ Ready in 1234ms
+ ○ Compiling /login ...
+ ✓ Compiled /login in 720ms (933 modules)
+ GET /login 200 in 959ms
+ ✓ Compiled /favicon.ico in 124ms (556 modules)
+ GET /favicon.ico 200 in 206ms
+ ✓ Compiled /callback in 343ms (956 modules)
+ GET /callback 200 in 431ms
+ GET /favicon.ico 200 in 21ms
+ ✓ Compiled /_not-found in 247ms (872 modules)
+ GET /.well-known/appspecific/com.chrome.devtools.json 404 in 366ms
+ ✓ Compiled / in 488ms (900 modules)
+ GET / 200 in 648ms
+ ✓ Compiled /favicon.ico in 69ms (520 modules)
+ GET /favicon.ico 200 in 142ms
+ ✓ Compiled /login in 118ms (576 modules)
+ GET /login 200 in 306ms
+ GET /callback 200 in 142ms
+ ✓ Compiled /dashboard in 796ms (914 modules)
+ ✓ Compiled in 124ms (397 modules)
+DashboardPage: Render started.
+DashboardPage: Render started.
+DashboardPage: Supabase client created. Is it truthy? true
+DashboardPage: Is supabase.auth truthy? true
+DashboardPage: Attempting to get user...
+DashboardPage: User fetched. Is user truthy? false
+DashboardPage: Render complete. User status: Not logged in
+DashboardPage: Supabase client created. Is it truthy? true
+DashboardPage: Is supabase.auth truthy? true
+DashboardPage: Attempting to get user...
+DashboardPage: User fetched. Is user truthy? false
+DashboardPage: Render complete. User status: Not logged in
+ GET /dashboard 200 in 588ms
+ GET /dashboard 200 in 661ms
+DashboardPage: Render started.
+DashboardPage: Supabase client created. Is it truthy? true
+DashboardPage: Is supabase.auth truthy? true
+DashboardPage: Attempting to get user...
+DashboardPage: User fetched. Is user truthy? false
+DashboardPage: Render complete. User status: Not logged in
+ GET /dashboard 200 in 19ms
+DashboardPage: Render started.
+DashboardPage: Supabase client created. Is it truthy? true
+DashboardPage: Is supabase.auth truthy? true
+DashboardPage: Attempting to get user...
+DashboardPage: User fetched. Is user truthy? false
+DashboardPage: Render complete. User status: Not logged in
+ GET /dashboard 200 in 37ms
+[?25h
