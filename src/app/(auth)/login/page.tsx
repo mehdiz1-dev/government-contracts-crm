@@ -18,25 +18,18 @@ export default function LoginPage() {
     setLoading(true);
     setError(null);
 
-    const { data, error: signInError } = await supabase.auth.signInWithPassword({
-      email,
-      password,
-    });
-
-    if (signInError) {
-      console.error('Login Failed (Client Side):', signInError.message); // NEW LOG
-      setError(signInError.message);
-    } else {
-      console.log('Login Successful (Client Side)! User:', data.user?.email); // NEW LOG
-
-      // --- CRUCIAL: Check session here directly client-side ---
-      const { data: { session } } = await supabase.auth.getSession();
-      console.log('Login Page Client Side: Session after login:', !!session); // NEW LOG
-      // --- END CRUCIAL ---
-
-      router.push('/dashboard');
+    try {
+      const { error } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      });
+      if (!error) router.push('/dashboard');
+    } catch (error: any) {
+      setError(error.message);
     }
     setLoading(false);
+
+
   };
 
   return (
