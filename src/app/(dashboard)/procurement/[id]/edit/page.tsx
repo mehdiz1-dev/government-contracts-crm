@@ -58,10 +58,10 @@ export default function EditProcurementPage() {
           id: data.id,
           step_name: data.step_name,
           contract_id: data.contract_id,
-          step_description: data.step_description || '',
+          step_description: data.step_description || '', // Corrected for null
           status: data.status,
-          due_date: data.due_date ? new Date(data.due_date).toISOString().split('T')[0] : '',
-          assigned_to_user_id: data.assigned_to_user_id || '',
+          due_date: data.due_date ? new Date(data.due_date).toISOString().split('T')[0] : '', // Corrected for null
+          assigned_to_user_id: data.assigned_to_user_id || '', // Corrected for null
         });
 
       } catch (err: any) {
@@ -183,19 +183,19 @@ export default function EditProcurementPage() {
           {/* Row 4: Due Date */}
           <div>
             <label htmlFor="due_date" className="block text-gray-700 text-sm font-bold mb-2">Due Date</label>
-            <input type="date" id="due_date" name="due_date" value={formData.due_date || ''} onChange={handleChange} className="shadow border rounded w-full py-2 px-3 text-gray-700" />
+            <input type="date" id="due_date" name="due_date" value={formData.due_date || ''} onChange={handleChange} className="shadow border rounded w-full py-2 px-3 text-gray-700" /> {/* Corrected for null */}
           </div>
 
           {/* Row 5: Assigned User ID */}
           <div className="md:col-span-2">
             <label htmlFor="assigned_to_user_id" className="block text-gray-700 text-sm font-bold mb-2">Assigned User ID</label>
-            <input type="text" id="assigned_to_user_id" name="assigned_to_user_id" value={formData.assigned_to_user_id || ''} onChange={handleChange} className="shadow border rounded w-full py-2 px-3 text-gray-700" placeholder="e.g., UUID of an existing user" />
+            <input type="text" id="assigned_to_user_id" name="assigned_to_user_id" value={formData.assigned_to_user_id || ''} onChange={handleChange} className="shadow border rounded w-full py-2 px-3 text-gray-700" placeholder="e.g., UUID of an existing user" /> {/* Corrected for null */}
           </div>
 
           {/* Row 6: Step Description (full width) */}
           <div className="md:col-span-2">
-            <label htmlFor="step_description" className="block text-gray-700 text-sm font-bold mb-2">Step Description</label>
-            <textarea id="step_description" name="step_description" value={formData.step_description} onChange={handleChange} rows={3} className="shadow border rounded w-full py-2 px-3 text-gray-700"></textarea>
+            <label htmlFor="step_description" className="block text-gray-700 text-sm font-bold mb-2">Description</label>
+            <textarea id="step_description" name="step_description" value={formData.step_description || ''} onChange={handleChange} rows={3} className="shadow border rounded w-full py-2 px-3 text-gray-700"></textarea> {/* Corrected for null */}
           </div>
 
           {/* Buttons */}

@@ -56,8 +56,10 @@ export default function CreateContractPage() {
         // Convert date strings to ISO format if they exist
         bc_date: formData.bc_date ? new Date(formData.bc_date).toISOString() : null,
         delivery_deadline_date: formData.delivery_deadline_date ? new Date(formData.delivery_deadline_date).toISOString() : null,
-        // Convert contract_value to a number
-        contract_value: formData.contract_value ? parseFloat(formData.contract_value) : null,
+        // Convert contract_value to a number safely:
+        contract_value: (formData.contract_value !== null && formData.contract_value !== '')
+                        ? parseFloat(formData.contract_value)
+                        : null, // <--- CORRECTED FIX
       };
 
       const response = await fetch('/api/contracts', { // POST request to your API route
@@ -109,11 +111,11 @@ export default function CreateContractPage() {
           {/* Row 1: BC Date, Delivery Deadline Date */}
           <div>
             <label htmlFor="bc_date" className="block text-gray-700 text-sm font-bold mb-2">BC Date</label>
-            <input type="date" id="bc_date" name="bc_date" value={formData.bc_date} onChange={handleChange} className="shadow border rounded w-full py-2 px-3 text-gray-700" />
+            <input type="date" id="bc_date" name="bc_date" value={formData.bc_date || ''} onChange={handleChange} className="shadow border rounded w-full py-2 px-3 text-gray-700" />
           </div>
           <div>
             <label htmlFor="delivery_deadline_date" className="block text-gray-700 text-sm font-bold mb-2">Delivery Deadline Date</label>
-            <input type="date" id="delivery_deadline_date" name="delivery_deadline_date" value={formData.delivery_deadline_date} onChange={handleChange} className="shadow border rounded w-full py-2 px-3 text-gray-700" />
+            <input type="date" id="delivery_deadline_date" name="delivery_deadline_date" value={formData.delivery_deadline_date || ''} onChange={handleChange} className="shadow border rounded w-full py-2 px-3 text-gray-700" />
           </div>
 
           {/* Row 2: Contract Number, TUNEPS Number */}
@@ -123,7 +125,7 @@ export default function CreateContractPage() {
           </div>
           <div>
             <label htmlFor="tuneps_number" className="block text-gray-700 text-sm font-bold mb-2">TUNEPS Number</label>
-            <input type="text" id="tuneps_number" name="tuneps_number" value={formData.tuneps_number} onChange={handleChange} className="shadow border rounded w-full py-2 px-3 text-gray-700" />
+            <input type="text" id="tuneps_number" name="tuneps_number" value={formData.tuneps_number || ''} onChange={handleChange} className="shadow border rounded w-full py-2 px-3 text-gray-700" />
           </div>
 
           {/* Row 3: Client ID, Assigned User ID (placeholders for now) */}
@@ -133,7 +135,7 @@ export default function CreateContractPage() {
           </div>
           <div>
             <label htmlFor="assigned_user_id" className="block text-gray-700 text-sm font-bold mb-2">Assigned User ID</label>
-            <input type="text" id="assigned_user_id" name="assigned_user_id" value={formData.assigned_user_id} onChange={handleChange} className="shadow border rounded w-full py-2 px-3 text-gray-700" placeholder="e.g., a user UUID" />
+            <input type="text" id="assigned_user_id" name="assigned_user_id" value={formData.assigned_user_id || ''} onChange={handleChange} className="shadow border rounded w-full py-2 px-3 text-gray-700" placeholder="e.g., a user UUID" />
           </div>
 
           {/* Row 4: Contract Status, Payment Type */}
@@ -157,7 +159,7 @@ export default function CreateContractPage() {
           {/* Row 5: Contract Value, Is Moins Disant */}
           <div>
             <label htmlFor="contract_value" className="block text-gray-700 text-sm font-bold mb-2">Contract Value</label>
-            <input type="number" id="contract_value" name="contract_value" value={formData.contract_value} onChange={handleChange} className="shadow border rounded w-full py-2 px-3 text-gray-700" step="0.01" />
+            <input type="number" id="contract_value" name="contract_value" value={formData.contract_value || ''} onChange={handleChange} className="shadow border rounded w-full py-2 px-3 text-gray-700" step="0.01" />
           </div>
           <div className="flex items-center mt-6">
             <input type="checkbox" id="is_moins_disant" name="is_moins_disant" checked={formData.is_moins_disant} onChange={handleChange} className="mr-2 leading-tight" />
@@ -167,7 +169,7 @@ export default function CreateContractPage() {
           {/* Row 6: Description */}
           <div className="md:col-span-2">
             <label htmlFor="description" className="block text-gray-700 text-sm font-bold mb-2">Description</label>
-            <textarea id="description" name="description" value={formData.description} onChange={handleChange} rows={3} className="shadow border rounded w-full py-2 px-3 text-gray-700"></textarea>
+            <textarea id="description" name="description" value={formData.description || ''} onChange={handleChange} rows={3} className="shadow border rounded w-full py-2 px-3 text-gray-700"></textarea>
           </div>
 
           {/* Buttons */}

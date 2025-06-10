@@ -46,10 +46,11 @@ export default function CreateTaskPage() {
       return;
     }
 
-    // Ensure at least one linked record (contract or client) OR assigned user, though optional for now
-    if (!formData.linked_contract_id && !formData.linked_client_id && !formData.assigned_to_user_id && formData.description === '') {
-        // This is a minimal check, adjust based on how strict you want tasks to be linked
-        // For now, allow tasks without explicit links if they have a description
+    // Ensure only one linked record (contract or client) OR assigned user, though optional for now
+    if (formData.linked_contract_id && formData.linked_client_id) {
+      setError('A task can only be linked to one contract OR one client, not both.');
+      setLoading(false);
+      return;
     }
 
     try {
@@ -57,10 +58,9 @@ export default function CreateTaskPage() {
         ...formData,
         // Convert due_date string to ISO format if it exists
         due_date: formData.due_date ? new Date(formData.due_date).toISOString() : null,
-        // Set linked_id to null if empty string to avoid Prisma errors with optional relations
-        linked_contract_id: formData.linked_contract_id || null,
-        linked_client_id: formData.linked_client_id || null,
-        assigned_to_user_id: formData.assigned_to_user_id || null,
+        linked_contract_id: formData.linked_contract_id || null, // Corrected for empty string
+        linked_client_id: formData.linked_client_id || null,     // Corrected for empty string
+        assigned_to_user_id: formData.assigned_to_user_id || null, // Corrected for empty string
       };
 
       const response = await fetch('/api/tasks', { // POST request to your API route
@@ -113,7 +113,7 @@ export default function CreateTaskPage() {
           </div>
           <div>
             <label htmlFor="due_date" className="block text-gray-700 text-sm font-bold mb-2">Due Date</label>
-            <input type="date" id="due_date" name="due_date" value={formData.due_date} onChange={handleChange} className="shadow border rounded w-full py-2 px-3 text-gray-700" />
+            <input type="date" id="due_date" name="due_date" value={formData.due_date || ''} onChange={handleChange} className="shadow border rounded w-full py-2 px-3 text-gray-700" />
           </div>
 
           {/* Row 2: Priority, Status */}
@@ -137,23 +137,23 @@ export default function CreateTaskPage() {
           {/* Row 3: Linked Contract ID, Linked Client ID (optional, but only one can be filled if strict) */}
           <div>
             <label htmlFor="linked_contract_id" className="block text-gray-700 text-sm font-bold mb-2">Linked Contract ID (Optional)</label>
-            <input type="text" id="linked_contract_id" name="linked_contract_id" value={formData.linked_contract_id} onChange={handleChange} className="shadow border rounded w-full py-2 px-3 text-gray-700" placeholder="e.g., UUID of an existing contract" />
+            <input type="text" id="linked_contract_id" name="linked_contract_id" value={formData.linked_contract_id || ''} onChange={handleChange} className="shadow border rounded w-full py-2 px-3 text-gray-700" placeholder="e.g., UUID of an existing contract" />
           </div>
           <div>
             <label htmlFor="linked_client_id" className="block text-gray-700 text-sm font-bold mb-2">Linked Client ID (Optional)</label>
-            <input type="text" id="linked_client_id" name="linked_client_id" value={formData.linked_client_id} onChange={handleChange} className="shadow border rounded w-full py-2 px-3 text-gray-700" placeholder="e.g., UUID of an existing client" />
+            <input type="text" id="linked_client_id" name="linked_client_id" value={formData.linked_client_id || ''} onChange={handleChange} className="shadow border rounded w-full py-2 px-3 text-gray-700" placeholder="e.g., UUID of an existing client" />
           </div>
 
           {/* Row 4: Assigned User ID */}
           <div className="md:col-span-2">
             <label htmlFor="assigned_to_user_id" className="block text-gray-700 text-sm font-bold mb-2">Assigned User ID (Optional)</label>
-            <input type="text" id="assigned_to_user_id" name="assigned_to_user_id" value={formData.assigned_to_user_id} onChange={handleChange} className="shadow border rounded w-full py-2 px-3 text-gray-700" placeholder="e.g., UUID of an existing user" />
+            <input type="text" id="assigned_to_user_id" name="assigned_to_user_id" value={formData.assigned_to_user_id || ''} onChange={handleChange} className="shadow border rounded w-full py-2 px-3 text-gray-700" placeholder="e.g., UUID of an existing user" />
           </div>
 
           {/* Row 5: Description (full width) */}
           <div className="md:col-span-2">
             <label htmlFor="description" className="block text-gray-700 text-sm font-bold mb-2">Description</label>
-            <textarea id="description" name="description" value={formData.description} onChange={handleChange} rows={3} className="shadow border rounded w-full py-2 px-3 text-gray-700"></textarea>
+            <textarea id="description" name="description" value={formData.description || ''} onChange={handleChange} rows={3} className="shadow border rounded w-full py-2 px-3 text-gray-700"></textarea>
           </div>
 
           {/* Buttons */}

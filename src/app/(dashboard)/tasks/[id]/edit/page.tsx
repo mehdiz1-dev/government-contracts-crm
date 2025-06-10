@@ -59,13 +59,13 @@ export default function EditTaskPage() {
         setFormData({
           id: data.id,
           title: data.title,
-          description: data.description || '',
-          due_date: data.due_date ? new Date(data.due_date).toISOString().split('T')[0] : '',
-          assigned_to_user_id: data.assigned_to_user_id || '',
+          description: data.description || '', // Corrected for null
+          due_date: data.due_date ? new Date(data.due_date).toISOString().split('T')[0] : '', // Corrected for null
+          assigned_to_user_id: data.assigned_to_user_id || '', // Corrected for null
           priority: data.priority,
           status: data.status,
-          linked_contract_id: data.linked_contract_id || '',
-          linked_client_id: data.linked_client_id || '',
+          linked_contract_id: data.linked_contract_id || '', // Corrected for null
+          linked_client_id: data.linked_client_id || '',     // Corrected for null
         });
 
       } catch (err: any) {
@@ -107,7 +107,6 @@ export default function EditTaskPage() {
       setLoading(false);
       return;
     }
-
 
     try {
       const taskDataToSend = {
