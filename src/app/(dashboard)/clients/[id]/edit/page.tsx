@@ -51,10 +51,10 @@ export default function EditClientPage() {
         setFormData({
           id: data.id,
           name: data.name,
-          contact_person: data.contact_person || '',
-          contact_email: data.contact_email || '',
-          contact_phone: data.contact_phone || '',
-          address: data.address || '',
+          contact_person: data.contact_person || '', // Corrected for null
+          contact_email: data.contact_email || '',   // Corrected for null
+          contact_phone: data.contact_phone || '',   // Corrected for null
+          address: data.address || '',               // Corrected for null
         });
 
       } catch (err: any) {
@@ -154,25 +154,25 @@ export default function EditClientPage() {
           {/* Contact Person */}
           <div>
             <label htmlFor="contact_person" className="block text-gray-700 text-sm font-bold mb-2">Contact Person</label>
-            <input type="text" id="contact_person" name="contact_person" value={formData.contact_person} onChange={handleChange} className="shadow border rounded w-full py-2 px-3 text-gray-700" />
+            <input type="text" id="contact_person" name="contact_person" value={formData.contact_person || ''} onChange={handleChange} className="shadow border rounded w-full py-2 px-3 text-gray-700" />
           </div>
 
           {/* Contact Email */}
           <div>
             <label htmlFor="contact_email" className="block text-gray-700 text-sm font-bold mb-2">Contact Email</label>
-            <input type="email" id="contact_email" name="contact_email" value={formData.contact_email} onChange={handleChange} className="shadow border rounded w-full py-2 px-3 text-gray-700" />
+            <input type="email" id="contact_email" name="contact_email" value={formData.contact_email || ''} onChange={handleChange} className="shadow border rounded w-full py-2 px-3 text-gray-700" />
           </div>
 
           {/* Contact Phone */}
           <div>
             <label htmlFor="contact_phone" className="block text-gray-700 text-sm font-bold mb-2">Contact Phone</label>
-            <input type="tel" id="contact_phone" name="contact_phone" value={formData.contact_phone} onChange={handleChange} className="shadow border rounded w-full py-2 px-3 text-gray-700" />
+            <input type="tel" id="contact_phone" name="contact_phone" value={formData.contact_phone || ''} onChange={handleChange} className="shadow border rounded w-full py-2 px-3 text-gray-700" />
           </div>
 
           {/* Address (full width) */}
           <div className="md:col-span-2">
             <label htmlFor="address" className="block text-gray-700 text-sm font-bold mb-2">Address</label>
-            <textarea id="address" name="address" value={formData.address} onChange={handleChange} rows={3} className="shadow border rounded w-full py-2 px-3 text-gray-700"></textarea>
+            <textarea id="address" name="address" value={formData.address || ''} onChange={handleChange} rows={3} className="shadow border rounded w-full py-2 px-3 text-gray-700"></textarea>
           </div>
 
           {/* Buttons */}
