@@ -48,6 +48,9 @@ export default function CreateProcurementPage() {
         ...formData,
         // Convert due_date string to ISO format if it exists
         due_date: formData.due_date ? new Date(formData.due_date).toISOString() : null,
+        // Set optional UUIDs to null if they are empty strings
+        step_description: formData.step_description || null, // Corrected for null
+        assigned_to_user_id: formData.assigned_to_user_id || null, // Corrected for null
       };
 
       const response = await fetch('/api/procurement', { // POST request to your API route
@@ -93,50 +96,4 @@ export default function CreateProcurementPage() {
           {/* Row 1: Step Name, Contract ID */}
           <div>
             <label htmlFor="step_name" className="block text-gray-700 text-sm font-bold mb-2">Step Name <span className="text-red-500">*</span></label>
-            <input type="text" id="step_name" name="step_name" value={formData.step_name} onChange={handleChange} required className="shadow border rounded w-full py-2 px-3 text-gray-700" />
-          </div>
-          <div>
-            <label htmlFor="contract_id" className="block text-gray-700 text-sm font-bold mb-2">Contract ID <span className="text-red-500">*</span></label>
-            <input type="text" id="contract_id" name="contract_id" value={formData.contract_id} onChange={handleChange} required className="shadow border rounded w-full py-2 px-3 text-gray-700" placeholder="e.g., UUID of an existing contract" />
-          </div>
-
-          {/* Row 2: Status, Due Date */}
-          <div>
-            <label htmlFor="status" className="block text-gray-700 text-sm font-bold mb-2">Status <span className="text-red-500">*</span></label>
-            <select id="status" name="status" value={formData.status} onChange={handleChange} required className="shadow border rounded w-full py-2 px-3 text-gray-700">
-              {procurementStatusOptions.map(option => (
-                <option key={option} value={option}>{option.replace(/_/g, ' ')}</option>
-              ))}
-            </select>
-          </div>
-          <div>
-            <label htmlFor="due_date" className="block text-gray-700 text-sm font-bold mb-2">Due Date</label>
-            <input type="date" id="due_date" name="due_date" value={formData.due_date || ''} onChange={handleChange} className="shadow border rounded w-full py-2 px-3 text-gray-700" /> {/* Corrected for null */}
-          </div>
-
-          {/* Row 3: Assigned User ID */}
-          <div className="md:col-span-2">
-            <label htmlFor="assigned_to_user_id" className="block text-gray-700 text-sm font-bold mb-2">Assigned User ID</label>
-            <input type="text" id="assigned_to_user_id" name="assigned_to_user_id" value={formData.assigned_to_user_id || ''} onChange={handleChange} className="shadow border rounded w-full py-2 px-3 text-gray-700" placeholder="e.g., UUID of an existing user" /> {/* Corrected for null */}
-          </div>
-
-          {/* Row 4: Step Description (full width) */}
-          <div className="md:col-span-2">
-            <label htmlFor="step_description" className="block text-gray-700 text-sm font-bold mb-2">Description</label>
-            <textarea id="step_description" name="step_description" value={formData.step_description || ''} onChange={handleChange} rows={3} className="shadow border rounded w-full py-2 px-3 text-gray-700"></textarea> {/* Corrected for null */}
-          </div>
-
-          {/* Buttons */}
-          <div className="md:col-span-2 flex justify-end gap-4">
-            <Link href="/procurement" className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center">
-              Cancel
-            </Link>
-            <button type="submit" disabled={loading} className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline inline-flex items-center">
-              {loading ? 'Adding...' : 'Add Step'}
-            </button>
-          </div>
-        </form>
-      </div>
-    </div>
-  );
-}
+            <input type="text" id="step_name" name="step_name" value={formData.step_name} onChange={handleChange} required className="shadow border rounded w-full py-2 px-3 text-gray-7
