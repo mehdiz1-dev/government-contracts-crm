@@ -64,7 +64,6 @@ export default function CreateProcurementPage() {
         setError(result.message || 'Failed to create procurement step. Please try again.');
       } else {
         setSuccess('Procurement step added successfully!');
-        // Optionally, reset form or redirect
         setFormData({ // Reset form to initial state
           step_name: '',
           contract_id: '',

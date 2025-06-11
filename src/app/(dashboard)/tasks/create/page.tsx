@@ -77,7 +77,6 @@ export default function CreateTaskPage() {
         setError(result.message || 'Failed to create task. Please try again.');
       } else {
         setSuccess('Task added successfully!');
-        // Optionally, reset form or redirect
         setFormData({ // Reset form to initial state
           title: '',
           description: '',

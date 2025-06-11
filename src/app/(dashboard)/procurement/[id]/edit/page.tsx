@@ -53,7 +53,7 @@ export default function EditProcurementPage() {
           return;
         }
 
-        // Convert Date objects to YYYY-MM-DD strings for date inputs
+        // Convert Date objects to ISO-MM-DD strings for date inputs
         setFormData({
           id: data.id,
           step_name: data.step_name,
